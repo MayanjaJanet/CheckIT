@@ -1,0 +1,44 @@
+{% load static %}
+<aside class="card sidebar-card mb-3 p-3">
+  <div class="d-flex align-items-center mb-3">
+    <div class="avatar rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-2" style="width:48px;height:48px;">
+      {{ request.user.username|slice:":1"|upper }}
+    </div>
+    <div>
+      <div class="fw-bold">{{ request.user.get_full_name|default:request.user.username }}</div>
+      <div class="small text-muted">Member since {{ request.user.date_joined|date:"M Y" }}</div>
+    </div>
+  </div>
+
+  <div class="list-group mb-3">
+    <a class="list-group-item list-group-item-action d-flex align-items-center" href="{% url 'core:dashboard' %}">
+      <svg class="sidebar-icon me-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.293l6 6V15H2v-5.707l6-6zM7 1.5L1 7.5V16h14V7.5L9 1.5H7z"/></svg>
+      Overview
+    </a>
+    <a class="list-group-item list-group-item-action d-flex align-items-center" href="{% url 'core:task-list' %}">
+      <svg class="sidebar-icon me-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M2 2h12v2H2V2zm0 4h12v8H2V6z"/></svg>
+      My tasks
+    </a>
+    <a class="list-group-item list-group-item-action d-flex align-items-center" href="{% url 'core:task-create' %}">
+      <svg class="sidebar-icon me-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5V7h2.5a.5.5 0 0 1 0 1H8.5v2.5a.5.5 0 0 1-1 0V8H5a.5.5 0 0 1 0-1h2.5V4.5A.5.5 0 0 1 8 4z"/></svg>
+      Create task
+    </a>
+  </div>
+
+  <div>
+    <h6 class="small text-muted mb-2">Quick stats</h6>
+    <ul class="list-unstyled small text-muted">
+      <li>Recent tasks: {{ recent_tasks|length }}</li>
+    </ul>
+    <div class="sidebar-count mt-3">
+      <a href="{% url 'core:task-list' %}?status=active" class="btn btn-warning btn-sm d-flex justify-content-between align-items-center">
+        <span>Pending</span>
+        <span class="badge bg-white text-dark">{{ pending_count|default:0 }}</span>
+      </a>
+      <a href="{% url 'core:task-list' %}?status=completed" class="btn btn-success btn-sm d-flex justify-content-between align-items-center mt-2">
+        <span>Completed</span>
+        <span class="badge bg-white text-dark">{{ completed_count|default:0 }}</span>
+      </a>
+    </div>
+  </div>
+</aside>

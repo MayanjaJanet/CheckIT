@@ -1,0 +1,32 @@
+.hero {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  background-image: url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1500&q=60");
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+
+.hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 58, 132, 0.6); /* blue overlay */
+  backdrop-filter: saturate(120%) blur(0.4px);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  padding: 5rem 1rem;
+}
+
+/* Improve button contrast */
+.btn-outline-light {
+  border-color: rgba(255,255,255,0.6);
+  color: #fff;
+}
+.btn-outline-light:hover {
+  background: rgba(255,255,255,0.08);
+}

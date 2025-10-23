@@ -1,0 +1,9 @@
+# Authentication: signup, login, logout, profile page.
+# Task model and CRUD pages (list, create, edit, delete).
+# Ownership: tasks associated with users and access-controlled.
+# Responsive Bootstrap layout and navigation.
+# README with setup/run steps and screenshots instructions.
+
+
+django==4.2.7
+pillow==10.0.1

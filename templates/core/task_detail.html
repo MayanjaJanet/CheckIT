@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ task.title }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <h3 class="mb-1">{{ task.title }}</h3>
+              <div class="small text-muted">Priority: {{ task.get_priority_display }}</div>
+            </div>
+            <div class="text-end">
+              <div class="small text-muted">Due: {% if task.due_date %}{{ task.due_date|date:'M j, Y' }}{% else %}—{% endif %}</div>
+              <div class="mb-2">
+                {% if task.completed %}
+                  <span class="badge bg-success">Completed</span>
+                {% else %}
+                  <span class="badge bg-secondary">Pending</span>
+                {% endif %}
+              </div>
+              <div class="mt-2">
+                <form method="post" action="{% url 'core:task-toggle' task.pk %}">{% csrf_token %}
+                  <button class="btn btn-sm {% if task.completed %}btn-success{% else %}btn-outline-primary{% endif %}">
+                    {% if task.completed %}Completed{% else %}Mark Complete{% endif %}
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <h6>Description</h6>
+          <p class="text-muted">{{ task.description|linebreaks }}</p>
+
+          <hr>
+          <h6>Progress</h6>
+          <div class="mb-2">
+            <div class="progress" style="height:14px;">
+              <div class="progress-bar" role="progressbar" style="width: {{ task.progress }}%;" aria-valuenow="{{ task.progress }}" aria-valuemin="0" aria-valuemax="100">{{ task.progress }}%</div>
+            </div>
+          </div>
+
+          <form method="post" action="{% url 'core:task-progress' task.pk %}" class="row g-2 align-items-center">
+            {% csrf_token %}
+            <div class="col-auto">
+              <input type="number" name="progress" min="0" max="100" value="{{ task.progress }}" class="form-control form-control-sm" style="width:90px;">
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-sm btn-primary">Update progress</button>
+            </div>
+          </form>
+          <hr>
+          <h6>Steps</h6>
+          <ul class="list-group mb-3">
+            {% for step in steps %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <input type="checkbox" {% if step.done %}checked{% endif %} disabled> {{ step.title }}
+                </div>
+                <div>
+                  <form method="post" action="{% url 'core:step-toggle' task.pk step.pk %}">{% csrf_token %}
+                    <button class="btn btn-sm btn-outline-primary">{% if step.done %}Undo{% else %}Mark{% endif %}</button>
+                  </form>
+                </div>
+              </li>
+            {% empty %}
+              <li class="list-group-item text-muted">No steps defined.</li>
+            {% endfor %}
+          </ul>
+
+          <form method="post" action="{% url 'core:steps-add' task.pk %}" class="mb-3">
+            {% csrf_token %}
+            <div class="input-group">
+              <input type="text" name="steps_text" class="form-control" placeholder="Add new step (single line)">
+              <button class="btn btn-outline-secondary">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <aside class="col-lg-4">
+      <div class="card p-3 mb-3">
+        <h6 class="mb-2">Details</h6>
+        <div class="small text-muted">Created: {{ task.created_at|date:'M j, Y' }}</div>
+        <div class="small text-muted">Last updated: {{ task.updated_at|date:'M j, Y' }}</div>
+      </div>
+
+      <div class="card p-3">
+        <h6 class="mb-2">Actions</h6>
+        <a href="{% url 'core:task-edit' task.pk %}" class="btn btn-sm btn-outline-secondary w-100 mb-2">Edit</a>
+        <form method="post" action="{% url 'core:task-delete' task.pk %}">{% csrf_token %}
+          <button class="btn btn-sm btn-outline-danger w-100">Delete</button>
+        </form>
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+/* Layout for the new dashboard */
+.dashboard-wrap {
+  display: flex;
+  min-height: calc(100vh - 120px);
+  background: #f6fbf8; /* pale green-ish background to match screenshot */
+}
+
+.dashboard-sidebar {
+  width: 260px;
+  background: #ffffff;
+  border-right: 1px solid rgba(0,0,0,0.04);
+  padding: 20px;
+}
+
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-topbar {
+  background: transparent;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  height: 72px;
+}
+
+.dashboard-content { background: transparent; }
+
+.sidebar-nav .sidebar-brand { padding-bottom: 10px; }
+.sidebar-nav .user-block img { object-fit: cover; }
+.sidebar-links .nav-link { color: #2f3b45; padding: 8px 10px; border-radius: 6px; }
+.sidebar-links .nav-link.active { background: rgba(13,110,253,0.08); color: #0d6efd; }
+
+.profile-card { background: linear-gradient(180deg,#fff,#fbfffe); border-radius:8px; padding:1rem; }
+
+.card { border-radius: 8px; }
+
+.list-group-item { border: none; }
+
+/* Responsive tweaks */
+@media (max-width: 991px) {
+  .dashboard-sidebar { display: none; }
+  .dashboard-wrap { min-height: auto; }
+}
+

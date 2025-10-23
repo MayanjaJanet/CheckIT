@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}{% if task %}Edit Task{% else %}Create Task{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="card-title mb-3">{% if task %}Edit Task{% else %}Create Task{% endif %}</h4>
+
+          <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            <div class="mb-3">
+              {{ form.title.label_tag }}
+              {{ form.title }}
+              {% for err in form.title.errors %}<div class="text-danger small mt-1">{{ err }}</div>{% endfor %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.description.label_tag }}
+              {{ form.description }}
+              {% for err in form.description.errors %}<div class="text-danger small mt-1">{{ err }}</div>{% endfor %}
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                {{ form.due_date.label_tag }}
+                {{ form.due_date }}
+                {% for err in form.due_date.errors %}<div class="text-danger small mt-1">{{ err }}</div>{% endfor %}
+              </div>
+
+              <div class="col-md-6 mb-3">
+                {{ form.priority.label_tag }}
+                {{ form.priority }}
+                {% for err in form.priority.errors %}<div class="text-danger small mt-1">{{ err }}</div>{% endfor %}
+              </div>
+            </div>
+
+            <div class="form-check mb-3">
+              {{ form.completed }}
+              <label class="form-check-label" for="id_completed">{{ form.completed.label }}</label>
+              {% for err in form.completed.errors %}<div class="text-danger small mt-1">{{ err }}</div>{% endfor %}
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary">{% if task %}Save changes{% else %}Create task{% endif %}</button>
+              <a href="{% url 'core:task-list' %}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

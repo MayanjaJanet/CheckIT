@@ -1,0 +1,121 @@
+.site-footer {
+  background: #ffffff;
+  color: #6c757d; /* muted */
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.site-footer a {
+  color: inherit;
+  text-decoration: none;
+}
+.site-footer a:hover {
+  color: #0d6efd; /* bootstrap primary */
+  text-decoration: underline;
+}
+
+.site-footer .h5 {
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 576px) {
+  .site-footer .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Social icons in footer */
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-right: 12px;
+  border-radius: 10px;
+  color: #495057;
+  background: rgba(0,0,0,0.03);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  transition: background-color .15s ease, transform .12s ease, box-shadow .12s ease;
+}
+.social-icon svg {
+  width: 26px;
+  height: 26px;
+}
+.social-icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  display: block;
+}
+.social-icon:hover {
+  background: rgba(13,110,253,0.12);
+  color: #0d6efd;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(13,110,253,0.12);
+}
+
+/* Task list card layout */
+.tasks-grid { display: flex; flex-direction: column; gap: 12px; }
+.task-card { border: 1px solid rgba(0,0,0,0.05); border-radius: 8px; box-shadow: 0 1px 6px rgba(16,24,40,0.04); }
+.task-card .card-body { padding: 16px; }
+.task-left { max-width: 70%; }
+.task-title { font-weight: 600; color: #0d6efd; }
+.task-desc { color: #6c757d; }
+.task-meta { margin-top: 8px; display: flex; align-items: center; gap: 12px; }
+.meta-icon { opacity: 0.8; margin-right: 6px; }
+.task-right { min-width: 180px; }
+
+@media (max-width: 768px) {
+  .task-card .card-body { flex-direction: column; gap: 12px; }
+  .task-left { max-width: 100%; }
+  .task-right { width: 100%; text-align: left; margin-top: 8px; }
+}
+
+/* Hero and filter box */
+.hero-box { background: linear-gradient(180deg,#0d6efd,#0b5ed7); padding: 28px; }
+.hero-box h1 { color: #fff; font-weight: 700; }
+.hero-box p { color: rgba(255,255,255,0.92); }
+.filter-box { border: 1px solid rgba(0,0,0,0.04); }
+.btn-icon-only { width: 44px; height: 40px; padding: 6px 8px; border-radius: 8px; }
+.btn-icon-only svg { display:block; margin:0 auto; }
+
+/* smaller search button variant */
+.btn.btn-primary.btn-icon-only { background: linear-gradient(90deg,#4f46e5,#0d6efd); border: none; }
+
+@media (max-width: 576px) {
+  .hero-box { padding: 18px; }
+  .filter-box .row > * { width: 100%; }
+}
+
+/* Sidebar icons */
+.sidebar-icon { width: 18px; height: 18px; display: inline-block; }
+.sidebar-card .list-group-item { display: flex; align-items: center; }
+
+/* Dashboard summary count buttons */
+.dashboard-count { padding: 12px 18px; font-size: 1.05rem; box-shadow: 0 6px 18px rgba(13,110,253,0.08); border-radius: 10px; }
+.dashboard-count .badge { font-weight: 600; }
+
+@media (max-width: 576px) {
+  .dashboard-count { width: 100%; display: inline-flex; justify-content: center; }
+}
+
+/* Sidebar counts - stacked buttons */
+.sidebar-count .btn { width: 100%; justify-content: space-between; padding: 10px 12px; font-weight: 600; }
+.sidebar-count .btn { width: 100%; justify-content: space-between; padding: 14px 16px; font-weight: 700; font-size: 1rem; border-radius: 10px; }
+.sidebar-count .btn .badge { min-width: 34px; min-height: 28px; display: inline-flex; align-items: center; justify-content: center; text-align: center; font-weight:700; }
+
+/* Make the sidebar buttons taller to occupy the white space */
+.sidebar-count { display: flex; flex-direction: column; gap: 12px; }
+.sidebar-count .btn { min-height: 64px; }
+
+/* header profile icon */
+.header-profile img, .header-profile .profile-fallback { width: 36px; height: 36px; border-radius: 50%; }
+.header-profile { padding: 6px; border-radius: 50%; }
+.header-profile:hover { background: rgba(13,110,253,0.06); }
+
+/* Navbar prominence tweaks */
+.navbar-brand { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.4px; color: #fff !important; }
+.navbar .nav-link { font-weight: 600; color: rgba(255,255,255,0.92); }
+.navbar .nav-link:hover { color: #fff; }
+.navbar { padding-top: 0.45rem; padding-bottom: 0.45rem; }
